@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Threat Watch — Vulnerability Advisory</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, Helvetica, sans-serif;">
+
+<!-- Outer wrapper -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f4f4f4;">
+<tr><td align="center" style="padding: 20px 10px;">
+
+<!-- Main container -->
+<table role="presentation" width="680" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border: 1px solid #e0e0e0;">
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HEADER: Logo + Date + Title Banner      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <tr>
+        <td style="background-color: #2E2E38; padding: 0;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <!-- Logo row -->
+                <tr>
+                    <td style="padding: 20px 28px 8px 28px;" valign="top">
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="80" valign="top">
+                                    <span style="color:#38BDF8;font-size:16px;font-weight:bold;">Cyber Threat Watch</span>
+                                </td>
+                                <td align="right" valign="top" style="color: #ffffff; font-size: 14px; padding-top: 4px;">
+                                    {{ alert_created_at }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- Separator line -->
+                <tr>
+                    <td style="padding: 0 28px;">
+                        <hr style="border: none; border-top: 1px solid #38BDF8; margin: 0;">
+                    </td>
+                </tr>
+                <!-- Title -->
+                <tr>
+                    <td style="padding: 14px 28px 20px 28px;">
+                        <span style="color: #38BDF8; font-size: 17px; font-weight: bold; letter-spacing: 0.3px;">
+                            Cyber Threat Watch &nbsp;&mdash;&nbsp; Vulnerability Advisory
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ADVISORY ID + TITLE                        -->
+    <!-- ═══════════════════════════════════════════ -->
+    <tr>
+        <td style="padding: 22px 28px 6px 28px; border-bottom: 2px solid #38BDF8;">
+            <p style="margin: 0 0 4px 0; font-size: 13px; color: #555555;">
+                <strong>Advisory ID:</strong> {{ advisory_id }}
+            </p>
+            <h1 style="margin: 0 0 14px 0; font-size: 18px; color: #2E2E38; line-height: 1.4; font-weight: bold;">
+                {{ alert_title }}
+            </h1>
+        </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- EXECUTIVE SUMMARY (LLM-generated)          -->
+    <!-- ═══════════════════════════════════════════ -->
+    {% if enrichment_summary %}
+    <tr>
+        <td style="padding: 18px 28px 0 28px;">
+            <p style="margin: 0 0 8px 0; font-size: 14px; font-weight: bold; color: #2E2E38; text-transform: uppercase; letter-spacing: 0.5px;">
+                Executive Summary
+            </p>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="border-left: 4px solid #38BDF8; padding: 12px 16px; background-color: #FAFAFA;">
+                        <p style="margin: 0; font-size: 13.5px; color: #333; line-height: 1.65;">
+                            {{ enrichment_summary }}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    {% else %}
+    <tr>
+        <td style="padding: 18px 28px 16px 28px;">
+            <p style="margin: 0; font-size: 13.5px; color: #333333; line-height: 1.65;">
+                {{ alert_message }}
+            </p>
+        </td>
+    </tr>
+    {% endif %}
+
+    <!-- AFFECTED REGIONS -->
+    {% if regions and regions|length > 0 %}
+    <tr>
+        <td style="padding: 16px 28px 0 28px;">
+            <p style="margin: 0 0 8px 0; font-size: 14px; font-weight: bold; color: #2E2E38; text-transform: uppercase; letter-spacing: 0.5px;">
+                Affected Regions
+            </p>
+            <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                    {% for region in regions %}
+                    <td style="padding: 0 8px 8px 0;">
+                        <span style="display: inline-block; padding: 5px 14px; background-color: #2E2E38; color: #38BDF8; font-size: 12px; font-weight: bold; border-radius: 4px;">
+                            {{ region }}
+                        </span>
+                    </td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </td>
+    </tr>
+    {% endif %}
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- VULNERABILITY OVERVIEW BOX                 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <tr>
+        <td style="padding: 0 28px 20px 28px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #F6F6FA; border: 1px solid #DDDDE0; border-radius: 4px;">
+                <tr>
+                    <td style="padding: 16px 20px 6px 20px;">
+                        <span style="font-size: 14px; font-weight: bold; color: #2E2E38; text-decoration: underline;">
+                            Vulnerability Overview
+                        </span>
+                    </td>
+                </tr>
+                {% if threat_description %}
+                <tr>
+                    <td style="padding: 10px 20px;">
+                        <p style="margin: 0 0 8px 0; font-size: 13px; color: #333333; font-weight: bold;">Description:</p>
+                        {{ threat_description | format_description }}
+                    </td>
+                </tr>
+                {% endif %}
+                {% if cve_ids %}
+                <tr>
+                    <td style="padding: 6px 20px;">
+                        <p style="margin: 0; font-size: 13px; color: #333333;">
+                            <strong>CVE IDs:</strong> {{ cve_ids }}
+                        </p>
+                    </td>
+                </tr>
+                {% endif %}
+                {% if published_at %}
+                <tr>
+                    <td style="padding: 6px 20px;">
+                        <p style="margin: 0; font-size: 13px; color: #333333;">
+                            <strong>Published:</strong> {{ published_at }}
+                        </p>
+                    </td>
+                </tr>
+                {% endif %}
+                {% if severity %}
+                <tr>
+                    <td style="padding: 6px 20px 16px 20px;">
+                        <p style="margin: 0; font-size: 13px; color: #333333;">
+                            <strong>CVSS Score:</strong>
+                            <span style="color: {% if severity == 'CRITICAL' %}#dc3545{% elif severity == 'HIGH' %}#d4700a{% elif severity == 'MEDIUM' %}#b8860b{% else %}#28a745{% endif %}; font-weight: bold;">
+                                {% if cvss_score is not none %}{{ "%.1f"|format(cvss_score) }}/10.0{% else %}N/A{% endif %} ({{ severity }})
+                            </span>
+                        </p>
+
+                    </td>
+                </tr>
+                {% endif %}
+            </table>
+        </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- AFFECTED PRODUCTS IN YOUR INVENTORY        -->
+    <!-- ═══════════════════════════════════════════ -->
+    {% if affected_products %}
+    <tr>
+        <td style="padding: 0 28px 20px 28px;">
+            <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #2E2E38;">Affected Products in Your Inventory</p>
+            <table role="presentation" width="100%" cellpadding="8" cellspacing="0" style="border: 1px solid #DDDDE0; border-collapse: collapse; font-size: 13px;">
+                <tr style="background-color: #2E2E38;">
+                    <td style="border: 1px solid #444; color: #38BDF8; font-weight: bold; padding: 10px 12px;">Product</td>
+                    <td style="border: 1px solid #444; color: #38BDF8; font-weight: bold; padding: 10px 12px;">Affected Versions</td>
+                    <td style="border: 1px solid #444; color: #38BDF8; font-weight: bold; padding: 10px 12px;">Notes</td>
+                </tr>
+                {% for product in affected_products %}
+                <tr style="background-color: {% if loop.index is odd %}#ffffff{% else %}#F6F6FA{% endif %};">
+                    <td style="border: 1px solid #DDDDE0; color: #333; padding: 9px 12px;">{{ product.name }}</td>
+                    <td style="border: 1px solid #DDDDE0; color: #333; padding: 9px 12px;">{{ product.versions }}</td>
+                    <td style="border: 1px solid #DDDDE0; color: #333; padding: 9px 12px;">{{ product.notes }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </td>
+    </tr>
+    {% endif %}
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- IMPACT                                     -->
+    <!-- ═══════════════════════════════════════════ -->
+    {% if impact_points %}
+    <tr>
+        <td style="padding: 0 28px 20px 28px;">
+            <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #2E2E38;">Impact</p>
+            <ul style="margin: 0; padding-left: 20px;">
+                {% for point in impact_points %}
+                <li style="font-size: 13px; color: #333333; line-height: 1.7;">{{ point }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    {% endif %}
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- REMEDIATION STEPS                          -->
+    <!-- ═══════════════════════════════════════════ -->
+    {% if remediation_steps %}
+    <tr>
+        <td style="padding: 0 28px 20px 28px;">
+            <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #2E2E38;">Remediation Steps</p>
+            <table role="presentation" width="100%" cellpadding="8" cellspacing="0" style="border: 1px solid #DDDDE0; border-collapse: collapse; font-size: 13px;">
+                <tr style="background-color: #2E2E38;">
+                    <td style="border: 1px solid #444; color: #38BDF8; font-weight: bold; padding: 10px 12px; width: 80px;">Step</td>
+                    <td style="border: 1px solid #444; color: #38BDF8; font-weight: bold; padding: 10px 12px;">What to do</td>
+                    <td style="border: 1px solid #444; color: #38BDF8; font-weight: bold; padding: 10px 12px; width: 160px;">Reference</td>
+                </tr>
+                {% for step in remediation_steps %}
+                <tr style="background-color: {% if loop.index is odd %}#ffffff{% else %}#F6F6FA{% endif %};">
+                    <td style="border: 1px solid #DDDDE0; color: #333; padding: 9px 12px; vertical-align: top;">{{ step.label }}</td>
+                    <td style="border: 1px solid #DDDDE0; color: #333; padding: 9px 12px; vertical-align: top;">{{ step.action }}</td>
+                    <td style="border: 1px solid #DDDDE0; color: #333; padding: 9px 12px; vertical-align: top;">
+                        {% if step.reference_url %}
+                        <a href="{{ step.reference_url }}" target="_blank" style="color: #2E6DB4; text-decoration: underline;">{{ step.reference_label if step.reference_label else step.reference_url }}</a>
+                        {% else %}
+                        {{ step.reference_label }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </td>
+    </tr>
+    {% endif %}
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- TEMPORARY MITIGATION                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    {% if temp_mitigation_points %}
+    <tr>
+        <td style="padding: 0 28px 20px 28px;">
+            <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #2E2E38;">Temporary Mitigation (If Immediate Patching Is Not Possible)</p>
+            <ul style="margin: 0; padding-left: 20px;">
+                {% for point in temp_mitigation_points %}
+                <li style="font-size: 13px; color: #333333; line-height: 1.7;">{{ point }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    {% endif %}
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- RECOMMENDED ACTIONS (LLM conclusion)       -->
+    <!-- ═══════════════════════════════════════════ -->
+    {% if enrichment_conclusion %}
+    <tr>
+        <td style="padding: 0 28px 20px 28px;">
+            <p style="margin: 0 0 8px 0; font-size: 14px; font-weight: bold; color: #2E2E38; text-transform: uppercase; letter-spacing: 0.5px;">
+                Recommended Actions
+            </p>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="border-left: 4px solid #2E2E38; padding: 12px 16px; background-color: #F6F6FA;">
+                        <p style="margin: 0; font-size: 13px; color: #333; line-height: 1.65;">
+                            {{ enrichment_conclusion }}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    {% endif %}
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ADDITIONAL RESOURCES                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    {% if additional_resources %}
+    <tr>
+        <td style="padding: 0 28px 24px 28px;">
+            <p style="margin: 0 0 8px 0; font-size: 13px; color: #333; font-weight: bold;">Additional Resources:</p>
+            {% for resource in additional_resources %}
+            <p style="margin: 0 0 4px 0; font-size: 13px;">
+                <a href="{{ resource.url }}" target="_blank" style="color: #2E6DB4; text-decoration: underline;">{{ resource.name }}</a>
+            </p>
+            {% endfor %}
+        </td>
+    </tr>
+    {% endif %}
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HELP LINE                                  -->
+    <!-- ═══════════════════════════════════════════ -->
+    <tr>
+        <td style="padding: 16px 28px; background-color: #F6F6FA; border-top: 1px solid #DDDDE0;">
+            <p style="margin: 0; font-size: 13px; color: #555555;">
+                Need help? Reply to this email or contact our SOC team.
+            </p>
+        </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- FOOTER: Copyright                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <tr>
+        <td style="padding: 16px 28px 20px 28px; background-color: #2E2E38;">
+            <p style="margin: 0; font-size: 11px; color: #999999; line-height: 1.5; font-style: italic;">
+                &copy; {{ year }} Cyber Threat Watch
+            </p>
+            <p style="margin: 4px 0 0 0; font-size: 11px; color: #777777; line-height: 1.5; font-style: italic;">
+                This advisory is intended for the named recipients and contains confidential information.
+            </p>
+        </td>
+    </tr>
+
+</table>
+<!-- /Main container -->
+
+</td></tr>
+</table>
+<!-- /Outer wrapper -->
+
+</body>
+</html>

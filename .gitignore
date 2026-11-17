@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+node_modules/
+frontend/build/
+postgres_data/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+celerybeat-schedule
