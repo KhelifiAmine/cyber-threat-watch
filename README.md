@@ -31,6 +31,26 @@ configuration have been removed.
   endpoint, login rate limiting, tenant data redaction for client accounts, security headers, and a
   start-up check that refuses weak secrets in production.
 
+## Screenshots
+
+**Dashboard:** intake over time, severity distribution, most affected products and sector exposure.
+
+![Dashboard](docs/screenshots/dashboard-charts.png)
+
+**Review queue:** items with new enrichment waiting for an analyst.
+
+![Review queue](docs/screenshots/review-queue.png)
+
+**CVE list and detail**
+
+![CVE list](docs/screenshots/cve-list.png)
+
+![CVE detail](docs/screenshots/cve-detail.png)
+
+**Scrapers:** schedule, status and run history of each source.
+
+![Scrapers](docs/screenshots/scrapers.png)
+
 ## Architecture
 
 | Service | Technology | Role |
